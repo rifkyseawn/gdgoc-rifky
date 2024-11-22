@@ -42,7 +42,7 @@ function SingleBook() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading..</p>;
   }
 
   if (error) {
