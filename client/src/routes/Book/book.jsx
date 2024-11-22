@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Book() {
-  const baseUrl = "https://gdgoc-rifky-backend.vercel.app//api/books";
+  const baseUrl = "https://gdgoc-rifky-backends.vercel.app//api/books";
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -72,7 +72,7 @@ function Book() {
             <li key={item.id}>
               <Link to={`/books/${item.slug}`}>
                 <img
-                  src={`https://gdgoc-rifky-backend.vercel.app//uploads/${item.thumbnail}`}
+                  src={`https://gdgoc-rifky-backends.vercel.app//uploads/${item.thumbnail}`}
                   alt={item.title}
                 />
                 <h3>{item.title}</h3>
