@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
-function singleBook() {
-  const [data, setData] = useState([]);
+function SingleBook() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const urlSlug = useParams();
   const baseUrl = `http://localhost:8000/api/books/${urlSlug.slug}`;
 
@@ -19,10 +21,13 @@ function singleBook() {
         setData(jsonData);
       } catch (error) {
         console.log(error);
+        setError("Error fetching book data. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [baseUrl]);
 
   function StarRating({ numberOfStars }) {
     const stars = [];
@@ -31,7 +36,21 @@ function singleBook() {
       stars.push(<span key={i}>⭐</span>);
     }
 
-    return <div>Rating: {stars}</div>;
+    return (
+      <div>Rating: {stars.length > 0 ? stars : "No rating available"}</div>
+    );
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!data) {
+    return <p>No book found.</p>;
   }
 
   return (
@@ -41,21 +60,23 @@ function singleBook() {
       <div className="bookdetails">
         <div className="col-1">
           <img
-            src={`http://localhost:8000/uploads/${data?.thumbnail}`}
-            alt={data?.title}
+            src={`http://localhost:8000/uploads/${data.thumbnail}`}
+            alt={data.title}
+            style={{ width: "200px", height: "auto" }}
           />
           <Link to={`/editbook/${data.slug}`}>Edit</Link>
         </div>
 
         <div className="col-2">
-          <h1>{data?.title}</h1>
-          <h3>{data?.author}</h3>
-          <p>{data?.description}</p>
-          <StarRating numberOfStars={data?.stars} />
+          <h1>{data.title}</h1>
+          <h3>{data.author}</h3>
+          <p>{data.description}</p>
+          <StarRating numberOfStars={data.stars} />
 
+          <p>Published At: {new Date(data.publishedAt).toLocaleDateString()}</p>
           <p>Category</p>
           <ul>
-            {data?.category?.map((item, index) => (
+            {data.category.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
@@ -65,4 +86,4 @@ function singleBook() {
   );
 }
 
-export default singleBook;
+export default SingleBook;

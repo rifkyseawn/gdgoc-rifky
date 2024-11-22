@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import NoImageSelected from "../../assets/no-image-selected.jpg";
 
-function editBook() {
+function EditBook() {
   const navigate = useNavigate();
-
   const urlSlug = useParams();
   const baseUrl = `http://localhost:8000/api/books/${urlSlug.slug}`;
 
@@ -16,7 +15,7 @@ function editBook() {
   const [description, setDescription] = useState("");
   const [categories, setCategories] = useState([]);
   const [thumbnail, setThumbnail] = useState(null);
-  const [submitted, setSubmitted] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [image, setImage] = useState("");
 
   const fetchData = async () => {
@@ -28,7 +27,7 @@ function editBook() {
       }
 
       const data = await response.json();
-      setBookId(data._id);
+      setBookId(data.id);
       setTitle(data.title);
       setSlug(data.slug);
       setAuthor(data.author);
@@ -36,14 +35,17 @@ function editBook() {
       setCategories(data.category);
       setDescription(data.description);
       setThumbnail(data.thumbnail);
-    } catch (error) {}
+      setImage(`http://localhost:8000/uploads/${data.thumbnail}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const createBook = async (e) => {
+  const updateBook = async (e) => {
     e.preventDefault();
     console.table([title, slug, author]);
 
@@ -54,7 +56,7 @@ function editBook() {
     formData.append("author", author);
     formData.append("stars", stars);
     formData.append("description", description);
-    formData.append("category", categories);
+    formData.append("category", categories.join(","));
 
     if (thumbnail) {
       formData.append("thumbnail", thumbnail);
@@ -67,12 +69,13 @@ function editBook() {
       });
 
       if (response.ok) {
-        setTitle("");
-        setSlug("");
-        setAuthor("");
         setSubmitted(true);
+        setTimeout(() => {
+          navigate("/books");
+        }, 2000);
       } else {
-        console.log("Failed to submit data.");
+        const errorData = await response.json();
+        console.error(errorData);
       }
     } catch (error) {
       console.log(error);
@@ -104,6 +107,8 @@ function editBook() {
       if (response.ok) {
         navigate("/books");
         console.log("Book removed.");
+      } else {
+        console.log("Failed to delete the book.");
       }
     } catch (error) {
       console.error(error);
@@ -125,10 +130,9 @@ function editBook() {
       {submitted ? (
         <p>Data submitted successfully!</p>
       ) : (
-        <form className="bookdetails" onSubmit={createBook}>
+        <form className="bookdetails" onSubmit={updateBook}>
           <div className="col-1">
             <label>Upload Thumbnail</label>
-
             {image ? (
               <img src={`${image}`} alt="preview image" />
             ) : (
@@ -151,6 +155,7 @@ function editBook() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                required
               />
             </div>
 
@@ -160,6 +165,7 @@ function editBook() {
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
+                required
               />
             </div>
 
@@ -169,15 +175,19 @@ function editBook() {
                 type="text"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
+                required
               />
             </div>
 
             <div>
               <label>Stars</label>
               <input
-                type="text"
+                type="number"
                 value={stars}
                 onChange={(e) => setStars(e.target.value)}
+                min="0"
+                max="5"
+                required
               />
             </div>
 
@@ -188,19 +198,21 @@ function editBook() {
                 cols="50"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                required
               />
             </div>
 
             <div>
-              <label>Categories (comma-seperated)</label>
+              <label>Categories (comma-separated)</label>
               <input
                 type="text"
-                value={categories}
+                value={categories.join(", ")}
                 onChange={handleCategoryChange}
+                required
               />
             </div>
 
-            <input type="submit" />
+            <input type="submit" value="Update Book" />
           </div>
         </form>
       )}
@@ -208,4 +220,4 @@ function editBook() {
   );
 }
 
-export default editBook;
+export default EditBook;

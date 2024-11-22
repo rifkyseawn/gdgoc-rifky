@@ -58,7 +58,7 @@ function Book() {
           <option value="adventure">Adventure</option>
           <option value="thriller">Thriller</option>
           <option value="fiction">Fiction</option>
-          <option value="other">other</option>
+          <option value="other">Other</option>
         </select>
       </div>
 
@@ -69,7 +69,7 @@ function Book() {
       ) : (
         <ul className="books">
           {data.map((item) => (
-            <li key={item._id}>
+            <li key={item.id}>
               <Link to={`/books/${item.slug}`}>
                 <img
                   src={`http://localhost:8000/uploads/${item.thumbnail}`}

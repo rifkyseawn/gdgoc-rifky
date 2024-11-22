@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NoImageSelected from "../../assets/no-image-selected.jpg";
 
-function createBook() {
+function CreateBook() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [author, setAuthor] = useState("");
@@ -9,7 +9,7 @@ function createBook() {
   const [description, setDescription] = useState("");
   const [categories, setCategories] = useState([]);
   const [thumbnail, setThumbnail] = useState(null);
-  const [submitted, setSubmitted] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [image, setImage] = useState(NoImageSelected);
 
   const createBook = async (e) => {
@@ -22,7 +22,7 @@ function createBook() {
     formData.append("author", author);
     formData.append("stars", stars);
     formData.append("description", description);
-    formData.append("category", categories);
+    formData.append("category", categories.join(","));
     formData.append("thumbnail", thumbnail);
 
     try {
@@ -32,12 +32,20 @@ function createBook() {
       });
 
       if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
         setTitle("");
         setSlug("");
         setAuthor("");
+        setStars(0);
+        setDescription("");
+        setCategories([]);
+        setThumbnail(null);
+        setImage(NoImageSelected);
         setSubmitted(true);
       } else {
-        console.log("Failed to submit data.");
+        const errorData = await response.json();
+        console.error(errorData);
       }
     } catch (error) {
       console.log(error);
@@ -84,6 +92,7 @@ function createBook() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                required
               />
             </div>
 
@@ -93,6 +102,7 @@ function createBook() {
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
+                required
               />
             </div>
 
@@ -102,15 +112,19 @@ function createBook() {
                 type="text"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
+                required
               />
             </div>
 
             <div>
               <label>Stars</label>
               <input
-                type="text"
+                type="number"
                 value={stars}
                 onChange={(e) => setStars(e.target.value)}
+                min="0"
+                max="5"
+                required
               />
             </div>
 
@@ -121,19 +135,21 @@ function createBook() {
                 cols="50"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                required
               />
             </div>
 
             <div>
-              <label>Categories (comma-seperated)</label>
+              <label>Categories (comma-separated)</label>
               <input
                 type="text"
-                value={categories}
+                value={categories.join(", ")}
                 onChange={handleCategoryChange}
+                required
               />
             </div>
 
-            <input type="submit" />
+            <input type="submit" value="Create Book" />
           </div>
         </form>
       )}
@@ -141,4 +157,4 @@ function createBook() {
   );
 }
 
-export default createBook;
+export default CreateBook;
