@@ -10,12 +10,16 @@ const PORT = process.env.PORT || 8000;
 
 connectDB();
 app.use(
+<<<<<<< HEAD
   cors({
     origin: "https://gdgoc-rifky.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+=======
+  cors());
+>>>>>>> 6550eb2b479378581501f98cd0bab2193c4eb6d3
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
