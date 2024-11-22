@@ -10,11 +10,7 @@ const PORT = process.env.PORT || 8000;
 
 connectDB();
 app.use(
-  cors({
-    origin: ["https://gdgoc-rifky-server.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
+  cors()
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -44,11 +40,10 @@ app.get("/api/books", async (req, res) => {
     }));
     res.json(formattedData);
   } catch (error) {
-    console.error("Error fetching books:", error);
+    console.error(error);
     res.status(500).json({ error: "An error occurred while fetching books." });
   }
 });
-
 
 app.get("/api/books/:slug", async (req, res) => {
   try {
