@@ -5,7 +5,7 @@ import NoImageSelected from "../../assets/no-image-selected.jpg";
 function EditBook() {
   const navigate = useNavigate();
   const urlSlug = useParams();
-  const baseUrl = `http://localhost:8000/api/books/${urlSlug.slug}`;
+  const baseUrl = `https://gdgoc-rifky-backend.vercel.app//api/books/${urlSlug.slug}`;
 
   const [bookId, setBookId] = useState("");
   const [title, setTitle] = useState("");
@@ -35,7 +35,7 @@ function EditBook() {
       setCategories(data.category);
       setDescription(data.description);
       setThumbnail(data.thumbnail);
-      setImage(`http://localhost:8000/uploads/${data.thumbnail}`);
+      setImage(`https://gdgoc-rifky-backend.vercel.app/uploads/${data.thumbnail}`);
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +63,7 @@ function EditBook() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/books", {
+      const response = await fetch("https://gdgoc-rifky-backend.vercel.app/api/books", {
         method: "PUT",
         body: formData,
       });
@@ -98,7 +98,7 @@ function EditBook() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/books/" + bookId,
+        "https://gdgoc-rifky-backend.vercel.app/api/books/" + bookId,
         {
           method: "DELETE",
         }
@@ -137,7 +137,7 @@ function EditBook() {
               <img src={`${image}`} alt="preview image" />
             ) : (
               <img
-                src={`http://localhost:8000/uploads/${thumbnail}`}
+                src={`https://gdgoc-rifky-backend.vercel.app/uploads/${thumbnail}`}
                 alt="preview image"
               />
             )}

@@ -11,10 +11,11 @@ const PORT = process.env.PORT || 8000;
 connectDB();
 app.use(
   cors({
-    origin: ["https://gdgoc-rifky.vercel.app/"],
-    methods: ["POST", "GET"],
+    origin: "https://gdgoc-rifky.vercel.app/",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-  }));
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
@@ -204,4 +205,3 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on Port: ${PORT}`);
 });
-
