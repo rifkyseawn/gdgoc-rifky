@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 connectDB();
 app.use(
   cors({
-    origin: ["https://gdgoc-rifky-server.vercel.app/"],
+    origin: ["https://gdgoc-rifky.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
