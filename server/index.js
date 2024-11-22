@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 connectDB();
 app.use(
   cors({
-    origin: "https://gdgoc-rifky.vercel.app/",
+    origin: "https://gdgoc-rifky.vercel.app/books/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -137,6 +137,7 @@ app.post("/api/books", upload.single("thumbnail"), async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    console.error("Error creating book:", error);
     res
       .status(500)
       .json({ error: "An error occurred while creating the book." });
