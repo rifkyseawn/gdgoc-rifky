@@ -1,7 +1,7 @@
 
 # Getting Started
 
-This web app is available at [https://gdgoc-rifky.vercel.app](https://gdgoc-rifky.vercel.app) & (https://gdgoc-rifky-backends.vercel.app).
+This web app is available at [https://gdgoc-rifky.vercel.app](https://gdgoc-rifky.vercel.app) & (https://gdgoc-rifky-backends.vercel.app/api/books).
 
 This project is primarily designed to implement a REST API as required in the GDGOC UGM hacker study case for the Back-End role. Additionally, it includes some Front-End components to assist users who may not have tools like Postman to test the API directly on the web.
 
