@@ -5,7 +5,7 @@ import NoImageSelected from "../../assets/no-image-selected.jpg";
 function EditBook() {
   const navigate = useNavigate();
   const urlSlug = useParams();
-  const baseUrl = `https://gdgoc-rifky-backends.vercel.app//api/books/${urlSlug.slug}`;
+  const baseUrl = `https://gdgoc-rifky-backends.vercel.app/api/books/${urlSlug.slug}`;
 
   const [bookId, setBookId] = useState("");
   const [title, setTitle] = useState("");
