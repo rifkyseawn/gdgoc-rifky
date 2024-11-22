@@ -11,9 +11,6 @@ const PORT = process.env.PORT || 8000;
 connectDB();
 app.use(
   cors({
-    origin: ["https://deploy-server-orcin.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
   })
 );
 app.use(express.urlencoded({ extended: true }));
@@ -205,3 +202,4 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on Port: ${PORT}`);
 });
+
