@@ -26,7 +26,7 @@ function CreateBook() {
     formData.append("thumbnail", thumbnail);
 
     try {
-      const response = await fetch("https://gdgoc-rifky-backends.vercel.app/api/books", {
+      const response = await fetch("http://localhost:8000/api/books", {
         method: "POST",
         body: formData,
       });

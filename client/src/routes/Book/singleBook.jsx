@@ -6,7 +6,7 @@ function SingleBook() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const urlSlug = useParams();
-  const baseUrl = `https://gdgoc-rifky-backends.vercel.app/api/books/${urlSlug.slug}`;
+  const baseUrl = `http://localhost:8000/api/books/${urlSlug.slug}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +60,7 @@ function SingleBook() {
       <div className="bookdetails">
         <div className="col-1">
           <img
-            src={`https://gdgoc-rifky-backends.vercel.app/uploads/${data.thumbnail}`}
+            src={`http://localhost:8000/uploads/${data.thumbnail}`}
             alt={data.title}
             style={{ width: "200px", height: "auto" }}
           />
