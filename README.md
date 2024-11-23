@@ -64,7 +64,7 @@ None.
 #### Response
 - **Status Code**: `200 OK`
 - **Response Body**:
-json { "data": [ { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": [ "category1", "category2" ], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } ] }
+json { "data": [ { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": ["category1", "category2"], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } ] }
 
 
 
@@ -85,7 +85,7 @@ json { "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars"
   - `201 Created` on success.
   - `400 Bad Request` if required parameters are missing or JSON is invalid.
 - **Response Body**:
-json { "message": "Book created successfully", "data": { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": [ "category1", "category2" ], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
+json { "message": "Book created successfully", "data": { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": ["category1", "category2"], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
 
 
 
@@ -104,7 +104,7 @@ None.
   - `200 OK` on success.
   - `404 Not Found` if the book with the specified slug does not exist.
 - **Response Body**:
-json { "data": { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": [ "category1", "category2" ], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
+json { "data": { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": ["category1", "category2"], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
 
 
 
@@ -128,7 +128,7 @@ json { "bookId": "yourbookid", "title": "updatedtitle", "slug": "updatedslug", "
   - `404 Not Found` if the book ID does not exist.
   - `400 Bad Request` if the JSON is invalid.
 - **Response Body**:
-json { "message": "Book updated successfully", "data": { "id": n, "title": "updatedtitle", "slug": "updatedslug", "author": "updatedauthor", "stars": n, "description": "updateddescription", "category": [ "updatedcategory1", "updatedcategory2" ], "thumbnail": "updatedthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
+json { "message": "Book updated successfully", "data": { "id": n, "title": "updatedtitle", "slug": "updatedslug", "author": "updatedauthor", "stars": n, "description": "updateddescription", "category": ["updatedcategory1", "updatedcategory2"], "thumbnail": "updatedthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
 
 
 
