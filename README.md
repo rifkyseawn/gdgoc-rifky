@@ -1,99 +1,153 @@
+# Book Management Application
 
-# Getting Started
+## Overview
 
-This web app is available at [https://gdgoc-rifky.vercel.app](https://gdgoc-rifky.vercel.app) & (https://gdgoc-rifky-backends.vercel.app/api/books).
+The Book Management Application is a web-based platform designed to manage a collection of books. It implements a RESTful API as part of the GDGOC UGM hacker study case for the Back-End role. The application also features a Front-End interface that allows users to interact with the API without needing tools like Postman.
 
-This project is primarily designed to implement a REST API as required in the GDGOC UGM hacker study case for the Back-End role. Additionally, it includes some Front-End components to assist users who may not have tools like Postman to test the API directly on the web.
+You can access the live application at:
+- [Frontend](https://gdgoc-rifky.vercel.app)
+- [Backend API](https://gdgoc-rifky-backends.vercel.app/api/books)
 
-## Endpoints
+If you prefer to run the application locally, you can clone the repository and deploy it yourself from the following link:
+- [GitHub Repository](https://github.com/rifkyseawn/gdgoc-rifky/tree/localhost-branch)
 
-### `api/books`
+## Getting Started
 
-#### Method: GET
-**Description**: Read all items.
+### Prerequisites
 
-**Request body**: None.
+To run this application locally, ensure you have the following installed:
+- Node.js (version 22.x)
+- MongoDB (for database management)
+- Git (for cloning the repository)
 
-**Response status**:
-- `200` on success.
+### Installation
 
-**Response body**:
+1. **Clone the Repository**
+bash git clone https://github.com/rifkyseawn/gdgoc-rifky.git cd gdgoc-rifky
+
+
+
+2. **Install Dependencies**
+   Navigate to both the `client` and `server` directories and install the required packages:
+bash cd client npm install cd ../server npm install
+
+
+
+3. **Set Up Environment Variables**
+   Create a `.env` file in the `server` directory and add your MongoDB connection string:
+plaintext MONGODB_URI=mongodb://:@localhost:27017/
+
+
+
+4. **Run the Application**
+   Start the server and client applications:
+bash
+
+In the server directory
+npm run dev
+
+In a new terminal, navigate to the client directory
+cd client npm run dev
+
+
+
+## API Endpoints
+
+### `GET /api/books`
+
+#### Description
+Fetches all books in the collection.
+
+#### Request Body
+None.
+
+#### Response
+- **Status Code**: `200 OK`
+- **Response Body**:
 json { "data": [ { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": ["category1", "category2"], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } ] }
 
 
 
 ---
 
-#### Method: POST
-**Description**: Create a new item.
+### `POST /api/books`
 
-**Request body**:
+#### Description
+Creates a new book entry in the collection.
+
+#### Request Body
 json { "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": "category1, category2", "thumbnail": "yourthumbnail.jpg" }
 
 
 
-**Response status**:
-- `201` on success.
-- `400` if parameters are missing or JSON is invalid.
-
-**Response body**:
+#### Response
+- **Status Codes**:
+  - `201 Created` on success.
+  - `400 Bad Request` if required parameters are missing or JSON is invalid.
+- **Response Body**:
 json { "message": "Book created successfully", "data": { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": ["category1", "category2"], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
 
 
 
 ---
 
-### `api/books/[book_id]`
+### `GET /api/books/:slug`
 
-#### Method: GET
-**Description**: Read item by book ID.
+#### Description
+Fetches a specific book by its slug.
 
-**Request body**: None.
+#### Request Body
+None.
 
-**Response status**:
-- `200` on success.
-- `404` if book ID not found.
-
-**Response body**:
+#### Response
+- **Status Codes**:
+  - `200 OK` on success.
+  - `404 Not Found` if the book with the specified slug does not exist.
+- **Response Body**:
 json { "data": { "id": n, "title": "yourtitle", "slug": "yourslug", "author": "yourauthor", "stars": n, "description": "yourdescription", "category": ["category1", "category2"], "thumbnail": "yourthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
 
 
 
 ---
 
-#### Method: PUT
-**Description**: Update item by book ID.
+### `PUT /api/books`
 
-**Request body**:
-json { "title": "updatedtitle", "slug": "updatedslug", "author": "updatedauthor", "stars": n, "description": "updateddescription", "category": "updatedcategory1, updatedcategory2", "thumbnail": "updatedthumbnail.jpg" }
+#### Description
+Updates an existing book entry by its ID.
+
+#### Request Body
+json { "bookId": "yourbookid", "title": "updatedtitle", "slug": "updatedslug", "author": "updatedauthor", "stars": n, "description": "updateddescription", "category": "updatedcategory1, updatedcategory2", "thumbnail": "updatedthumbnail.jpg" }
 
 
-**Note**: May contain any number of fields from `[title, slug, author, stars, description, category, thumbnail]`.
 
-**Response status**:
-- `200` on success.
-- `404` if book ID not found.
-- `400` if JSON is invalid.
+**Note**: You may include any combination of fields from `[title, slug, author, stars, description, category, thumbnail]`.
 
-**Response body**:
+#### Response
+- **Status Codes**:
+  - `200 OK` on success.
+  - `404 Not Found` if the book ID does not exist.
+  - `400 Bad Request` if the JSON is invalid.
+- **Response Body**:
 json { "message": "Book updated successfully", "data": { "id": n, "title": "updatedtitle", "slug": "updatedslug", "author": "updatedauthor", "stars": n, "description": "updateddescription", "category": ["updatedcategory1", "updatedcategory2"], "thumbnail": "updatedthumbnail.jpg", "createdAt": "yourcreationdate", "publishedAt": "yourpublicationdate", "updatedAt": "yourmodificationdate" } }
 
 
 
 ---
 
-#### Method: DELETE
-**Description**: Delete item by book ID.
+### `DELETE /api/books/:id`
 
-**Request body**: None.
+#### Description
+Deletes a book entry by its ID.
 
-**Response status**:
-- `200` on success.
-- `404` if book ID not found.
+#### Request Body
+None.
 
-**Response body**:
+#### Response
+- **Status Codes**:
+  - `200 OK` on success.
+  - `404 Not Found` if the book ID does not exist.
+- **Response Body**:
 json { "message": "Book deleted successfully" }
-
 
 
 
@@ -101,4 +155,6 @@ json { "message": "Book deleted successfully" }
 
 ## Conclusion
 
-This documentation provides a comprehensive overview of the API endpoints available in the Book Management application. It includes details on how to interact with the API, the expected request and response formats, and the possible status codes. This should assist developers and users in effectively utilizing the API for their needs. If you have any questions or need further assistance, feel free to reach out!
+This documentation provides a comprehensive overview of the API endpoints available in the Book Management Application. It includes detailed descriptions of each endpoint, the expected request and response formats, and the possible status codes. This should assist developers and users in effectively utilizing the API for their needs.
+
+For any questions or further assistance, please feel free to reach out via the GitHub repository or contact the project maintainer.
