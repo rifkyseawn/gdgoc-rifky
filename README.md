@@ -20,21 +20,26 @@ To run this application locally, ensure you have the following installed:
 - MongoDB (for database management)
 - Git (for cloning the repository)
 
-### Installation
+## Installation
 
 1. **Clone the Repository**
 bash git clone https://github.com/rifkyseawn/gdgoc-rifky.git cd gdgoc-rifky
 
 
 
+   **Note**: To run the application locally, switch to the `localhost-branch`:
+bash git checkout localhost-branch
+
+
+
 2. **Install Dependencies**
-   Navigate to both the `client` and `server` directories and install the required packages:
+   Navigate to both the client and server directories and install the required packages:
 bash cd client npm install cd ../server npm install
 
 
 
 3. **Set Up Environment Variables**
-   Create a `.env` file in the `server` directory and add your MongoDB connection string:
+   Create a `.env` file in the server directory and add your MongoDB connection string:
 plaintext MONGODB_URI=mongodb://:@localhost:27017/
 
 
