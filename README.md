@@ -11,6 +11,9 @@ You can access the live application at:
 If you prefer to run the application locally, you can clone the repository and deploy it yourself from the following link:
 - [GitHub Repository](https://github.com/rifkyseawn/gdgoc-rifky/tree/localhost-branch)
 
+### Video Explanation
+For a detailed explanation of the code, you can watch the following video: [YouTube Video](https://youtu.be/BEwfsOToor4)
+
 ## Getting Started
 
 ### Prerequisites
